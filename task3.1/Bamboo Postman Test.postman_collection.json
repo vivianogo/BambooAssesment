@@ -1,0 +1,290 @@
+{
+	"info": {
+		"_postman_id": "c2fbb0f0-2d9f-4530-b088-90b782412f29",
+		"name": "Bamboo Postman Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Valid Get User Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Returns success status code\", ()=>{\r",
+							"    pm.response.to.be.success;\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Returns Json that has a value\", ()=>{\r",
+							"    pm.response.to.have.jsonBody();\r",
+							"\r",
+							"    let jdata = pm.response.toJSON();\r",
+							"    pm.expect(jdata).contains.members\r",
+							"})\r",
+							"pm.test(\"valid schema\", ()=>{\r",
+							"    let jdata = pm.response.json();\r",
+							"    pm.expect(jdata).to.have.property(\"data\");\r",
+							"    pm.expect(jdata).to.have.property(\"support\");\r",
+							"})\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/api/users/1",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid Get User Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Doesnt not exist',()=>{\r",
+							"   let jdata = pm.response.json();\r",
+							"    pm.expect(jdata).to.be.empty;\r",
+							"})\r",
+							"\r",
+							"pm.test('Status code Not Found',()=>{\r",
+							"    pm.response.to.be.status(404);\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users/0\n",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users",
+						"0\n"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Valid Post User Req",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Status code is 200 - pm.response\",()=> {\r",
+							"    pm.response.to.have.status(201); \r",
+							"});\r",
+							" \r",
+							"pm.test(\"Response is none empty json\", ()=>{\r",
+							"    pm.response.to.have.jsonBody();\r",
+							"\r",
+							"    let jdata = pm.response.toJSON();\r",
+							"    pm.expect(jdata).contains.members\r",
+							"})\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response contains id of created user\", ()=>{\r",
+							"    let jdata = pm.response.toJSON();\r",
+							"    pm.expect(jdata).has.property(\"id\");\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"morpheus\",\r\n    \"job\": \"leader\"\r\n}"
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users\n\n",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users\n\n"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid Post User Req",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response returns bad request\",()=> {\r",
+							"    pm.response.to.be.badRequest;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"job\": \"leader\"\r\n}"
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users\n\n",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users\n\n"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update user request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Returns success status code\", ()=>{\r",
+							"    pm.response.to.be.success;\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Returns Json that has a value\", ()=>{\r",
+							"    pm.response.to.have.jsonBody();\r",
+							"\r",
+							"    let jdata = pm.response.toJSON();\r",
+							"    pm.expect(jdata).contains.members\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"morpheus\",\r\n    \"job\": \"zion resident\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users/2",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid Update user request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response returns bad request\",()=> {\r",
+							"    pm.response.to.be.badRequest;\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": 23,\r\n    \"job\": \"zion resident\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users/2",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

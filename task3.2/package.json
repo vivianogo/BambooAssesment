@@ -1,0 +1,17 @@
+{
+  "name": "bamboo_cypress",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  
+    "scripts": {
+      "cypress:open": "cypress open"
+    },
+  
+  "keywords": [],
+  "author": "Ogochukwu Nwokoma",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^9.4.1"
+  }
+}
