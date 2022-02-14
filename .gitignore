@@ -1,4 +1,4 @@
-.gitingnore
+.gitignore
 .vscode
 task3.2/node_modules
 task3.2/package-lock.json
